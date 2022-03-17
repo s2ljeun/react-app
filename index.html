@@ -9,9 +9,9 @@
   <script type="text/babel">
     const root = document.getElementById("root");
 
-    function App() {
+    function MinutesToHours() {
       const [amount, setAmount] = React.useState(0);
-      const [flipped, setFlipped] = React.useState(false);
+      const [inverted, setInverted] = React.useState(false);
       
       const onChange = (event) => {
         setAmount(event.target.value);
@@ -20,36 +20,63 @@
       const reset = () => setAmount(0);
       const onFlip = () => {
         reset();
-        setFlipped((current) => !current);
+        setInverted((current) => !current);
       };
 
       return ( // 이하 유저가 보게 될 컴포넌트
         <div>
-          <h1>Super Converter</h1>
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
-              value={flipped ? amount*60 : amount}
+              value={inverted ? amount*60 : amount}
+              // inverted ? = if (inverted === true) than ...
               id="minutes"
               placeholder="minutes"
               type="number"
               onChange={onChange}
-              disabled={flipped === true}
+              disabled={inverted === true}
             />  
           </div>
           <div>
             <label htmlFor="hours">Hours</label>
             <input
-              value={flipped ? amount : Math.round(amount / 60)}
+              value={inverted ? amount : Math.round(amount / 60)}
               id="hours"
               placeholder="Hours"
               type="number"
               onChange={onChange}
-              disabled={flipped === false} // !flipped와 같은 조건문
+              disabled={inverted === false} // !inverted와 같은 조건문
               />
           </div>
           <button onClick={reset}>Reset</button>
-          <button onClick={onFlip}>Flip</button>
+          <button onClick={onFlip}>{inverted ? "Turn back" : "Invert"}</button>
+        </div>
+      );
+    }
+    function KmToMiles(){
+      return(
+        <h3>KM 2 M</h3>
+      );
+    }
+
+    function App() {
+      const [index, setIndex] = React.useState("xx");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      }
+
+      return ( // 이하 유저가 보게 될 컴포넌트
+        <div>
+          <h1>Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="xx">Select Your Units</option>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">Km & Miles</option>
+          </select>
+          <hr />
+          {index === "xx" ? "State is Funny!!!" : null}
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
         </div>
       );
     }
