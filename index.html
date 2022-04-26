@@ -8,24 +8,33 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     function Btn({ text, onClick }){ //함수형 컴포넌트
-      return <button
-      onClick = {onClick} // eventlistener = prop
-      style={{
-        backgroundColor: "tomato",
-        color: "white",
-        padding: "10px 20px",
-        border: 0,
-        borderRadius: 10,
-      }}>{text}</button>;
+      console.log(text, "was rendered")
+      return (
+        <button
+          onClick = {onClick} // eventlistener = prop
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+          }}
+        >
+        {text}
+      </button>
+      );
     }
+
+    const MemorizeBtn = React.memo(Btn) //memorized version of Btn
+
     function App() {
       const [value, setValue] = React.useState("Save Changes");
       const changeValue = () => setValue("Revert Changes");
       return (
         // Btn 안의 onClick은 event listener가 아닌 prop
         <div>
-          <Btn text={value} onClick={changeValue} />
-          <Btn text="Continue" />
+          <MemorizeBtn text={value} onClick={changeValue} />
+          <MemorizeBtn text="Continue" />
         </div>
       );
     }
