@@ -7,21 +7,24 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function Btn({text, big}){ //함수형 컴포넌트
-      return <button style={{
+    function Btn({ text, onClick }){ //함수형 컴포넌트
+      return <button
+      onClick = {onClick} // eventlistener = prop
+      style={{
         backgroundColor: "tomato",
         color: "white",
         padding: "10px 20px",
         border: 0,
         borderRadius: 10,
-        fontSize: big? 18 : 16, // prop 기반으로 style안에서 if else 사용가능
       }}>{text}</button>;
     }
     function App() {
-       // 이하 유저가 보게 될 컴포넌트
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
       return (
+        // Btn 안의 onClick은 event listener가 아닌 prop
         <div>
-          <Btn text="Save Changes" big="true" />
+          <Btn text={value} onClick={changeValue} />
           <Btn text="Continue" />
         </div>
       );
