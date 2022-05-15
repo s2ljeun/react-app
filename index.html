@@ -9,9 +9,10 @@
   <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
 
-    function Label({text}, {todoNum}){
+    function Label({text}, {onClick}){
       return(
-        <label htmlFor={todoNum}
+        <label
+        onClick={onClick}
         style={{
               color:"white",
               backgroundColor:"black",
@@ -31,7 +32,8 @@
 
     function CheckBox({checkNum}){
       return(
-        <input id={checkNum} type="checkbox"
+        <input id={checkNum}
+        type="checkbox"
         style={{
         }}
         ></input>
@@ -45,22 +47,23 @@
     // };
 
     function App() {
-      // const [value, setValue] = React.useState("Save Changes");
-      // const changeValue = () => setValue("Revert Changes");
+      const [value, setValue] = React.useState("To Do");
+      const doToDo = () => setValue("Done!");
       return (
         // Btn 안의 onClick은 event listener가 아닌 prop
         <div>
+          
           <form>
             <div>
-              <Label text="To Do 1" todoNum="todo-1" />
+              <Label text={value} onClick={doToDo} />
               <CheckBox checkNum="todo-1" />
             </div>
             <div>
-              <Label text="To Do 2" todoNum="todo-2" />
+              <Label text="To Do 2" />
               <CheckBox checkNum="todo-2" />
             </div>
             <div>
-              <Label text="To Do 3" todoNum="todo-3" />
+              <Label text="To Do 3" />
               <CheckBox checkNum="todo-3" />
             </div>
           </form>
