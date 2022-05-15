@@ -3,7 +3,7 @@
   <body>
     <div id="root"></div>
   </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
@@ -24,10 +24,12 @@
         {text}
       </button>
       );
+      // {text} == {props.text}
     }
+
     Btn.propTypes = {
-      text: PropTypes.string.isReqiured,
-      fontSize: PropTypes.number,
+      text: PropTypes.string.isRequired,
+      onClick: PropTypes.func,
     };
 
     function App() {
@@ -36,8 +38,8 @@
       return (
         // Btn 안의 onClick은 event listener가 아닌 prop
         <div>
-          <Btn text="Save Changes" fontSize={18} />
-          <Btn text={14} fontSize={"Continue"} />
+          <Btn text={value} onClick={changeValue}/>
+          <Btn text="Continue" />
         </div>
       );
     }
