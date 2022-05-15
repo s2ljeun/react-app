@@ -8,38 +8,62 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
-    function Btn({ text, fontSize = 14 }){ //함수형 컴포넌트
-      //정의되지 않은 변수의 기본값 지정 가능(JS)
-      return (
-        <button
-          style={{
-            backgroundColor: "tomato",
-            color: "white",
-            padding: "10px 20px",
-            border: 0,
-            borderRadius: 10,
-            fontSize,
+
+    function Label({text}, {todoNum}){
+      return(
+        <label htmlFor={todoNum}
+        style={{
+              color:"white",
+              backgroundColor:"black",
+              listStyle: "none",
+              width: "200px",
+              padding: "5px 10px",
+              border: 0,
+              borderRadius: 10,
+              marginTop: 10,
+              display: "inline-block",
           }}
         >
         {text}
-      </button>
-      );
-      // {text} == {props.text}
+        </label>
+      )
     }
 
-    Btn.propTypes = {
-      text: PropTypes.string.isRequired,
-      onClick: PropTypes.func,
-    };
+    function CheckBox({checkNum}){
+      return(
+        <input id={checkNum} type="checkbox"
+        style={{
+        }}
+        ></input>
+      )
+    }
+
+
+    // Btn.propTypes = {
+    //   text: PropTypes.string.isRequired,
+    //   onClick: PropTypes.func,
+    // };
 
     function App() {
-      const [value, setValue] = React.useState("Save Changes");
-      const changeValue = () => setValue("Revert Changes");
+      // const [value, setValue] = React.useState("Save Changes");
+      // const changeValue = () => setValue("Revert Changes");
       return (
         // Btn 안의 onClick은 event listener가 아닌 prop
         <div>
-          <Btn text={value} onClick={changeValue}/>
-          <Btn text="Continue" />
+          <form>
+            <div>
+              <Label text="To Do 1" todoNum="todo-1" />
+              <CheckBox checkNum="todo-1" />
+            </div>
+            <div>
+              <Label text="To Do 2" todoNum="todo-2" />
+              <CheckBox checkNum="todo-2" />
+            </div>
+            <div>
+              <Label text="To Do 3" todoNum="todo-3" />
+              <CheckBox checkNum="todo-3" />
+            </div>
+          </form>
         </div>
       );
     }
