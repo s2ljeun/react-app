@@ -1,77 +1,77 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <div id="root"></div>
-  </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
-  <script type="text/babel">
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+    <script type="text/babel">
 
-    function Label({text}, {onClick}){
-      return(
-        <label
-        onClick={onClick}
-        style={{
-              color:"white",
-              backgroundColor:"black",
-              listStyle: "none",
-              width: "200px",
-              padding: "5px 10px",
-              border: 0,
-              borderRadius: 10,
-              marginTop: 10,
-              display: "inline-block",
-          }}
-        >
-        {text}
-        </label>
-      )
-    }
+        function Label({text}, {onClick}){
+        return(
+            <label
+            onClick={onClick}
+            style={{
+                color:"white",
+                backgroundColor:"black",
+                listStyle: "none",
+                width: "200px",
+                padding: "5px 10px",
+                border: 0,
+                borderRadius: 10,
+                marginTop: 10,
+                display: "inline-block",
+            }}
+            >
+            {text}
+            </label>
+        )
+        }
 
-    function CheckBox({checkNum}){
-      return(
-        <input id={checkNum}
-        type="checkbox"
-        style={{
-        }}
-        ></input>
-      )
-    }
+        function CheckBox({checkNum}){
+        return(
+            <input id={checkNum}
+            type="checkbox"
+            style={{
+            }}
+            ></input>
+        )
+        }
 
 
-    // Btn.propTypes = {
-    //   text: PropTypes.string.isRequired,
-    //   onClick: PropTypes.func,
-    // };
+        // Btn.propTypes = {
+        //   text: PropTypes.string.isRequired,
+        //   onClick: PropTypes.func,
+        // };
 
-    function App() {
-      const [value, setValue] = React.useState("To Do");
-      const doToDo = () => setValue("Done!");
-      return (
-        // Btn 안의 onClick은 event listener가 아닌 prop
-        <div>
-          
-          <form>
+        function App() {
+        const [value, setValue] = React.useState("To Do");
+        const doToDo = () => setValue("Done!");
+        return (
+            // Btn 안의 onClick은 event listener가 아닌 prop
             <div>
-              <Label text={value} onClick={doToDo} />
-              <CheckBox checkNum="todo-1" />
+            
+            <form>
+                <div>
+                <Label text={value} onClick={doToDo} />
+                <CheckBox checkNum="todo-1" />
+                </div>
+                <div>
+                <Label text="To Do 2" />
+                <CheckBox checkNum="todo-2" />
+                </div>
+                <div>
+                <Label text="To Do 3" />
+                <CheckBox checkNum="todo-3" />
+                </div>
+            </form>
             </div>
-            <div>
-              <Label text="To Do 2" />
-              <CheckBox checkNum="todo-2" />
-            </div>
-            <div>
-              <Label text="To Do 3" />
-              <CheckBox checkNum="todo-3" />
-            </div>
-          </form>
-        </div>
-      );
-    }
-    const root = document.getElementById("root");
-    ReactDOM.render(<App />, root);
-    
-  </script>
+        );
+        }
+        const root = document.getElementById("root");
+        ReactDOM.render(<App />, root);
+        
+    </script>
 </html>
